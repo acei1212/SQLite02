@@ -5,12 +5,15 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 public class MainActivity extends AppCompatActivity {
     ListView lv;
     ArrayAdapter<String> adapter;
+    Phone[] p;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         PhoneDAO dao = new PhoneDAODBImpl(MainActivity.this);
-        Phone[] p = dao.getList();
+        p = dao.getList();
         String str[] = new String[p.length];
         for (int i=0;i<p.length;i++)
         {
@@ -32,6 +35,15 @@ public class MainActivity extends AppCompatActivity {
         }
         adapter = new ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_list_item_1, str);
         lv.setAdapter(adapter);
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                int id = p[position].id;
+                Intent it = new Intent(MainActivity.this, DetialActivity.class);
+                it.putExtra("id", id);
+                startActivity(it);
+            }
+        });
 
     }
 
