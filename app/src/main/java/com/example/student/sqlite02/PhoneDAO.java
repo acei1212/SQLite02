@@ -9,5 +9,6 @@ public interface PhoneDAO {
     public Phone[] getList();
     public void addOne(Phone p);
     public Phone getOne(int id);
-
+    public void delete(Phone p);
+    public void update(Phone p);
 }

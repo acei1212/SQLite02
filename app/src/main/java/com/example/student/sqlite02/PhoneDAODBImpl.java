@@ -72,4 +72,23 @@ public class PhoneDAODBImpl implements PhoneDAO {
         return p;
 
     }
+
+    @Override
+    public void delete(Phone p) {
+        SQLiteDatabase db = helper.getWritableDatabase();
+        db.delete("phone", "id=?", new String[] {String.valueOf(p.id)});
+        db.close();
+    }
+
+    @Override
+    public void update(Phone p)
+    {
+        SQLiteDatabase db = helper.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put("name", p.name);
+        cv.put("tel", p.tel);
+        cv.put("addr", p.addr);
+        db.update("phone", cv, "id=?",new String[] {String.valueOf(p.id)});
+        db.close();
+    }
 }
