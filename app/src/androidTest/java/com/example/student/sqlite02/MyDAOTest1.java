@@ -51,13 +51,13 @@ public class MyDAOTest1 {
         PhoneDAODBImpl dao = new PhoneDAODBImpl(appContext);
         Phone p1 = new Phone("CCC", "333", "CC33");
 
-        dao.clearAll();
-        dao.addOne(p1);
-        Phone pArray[] = dao.getList();
+        dao.clearAll(); //清空全部
+        dao.addOne(p1); //新增p1
+        Phone pArray[] = dao.getList(); //取得清單
         p1.id = pArray[0].id;
         p1.name = "CDE";
-        dao.update(p1);
-        Phone pArray2[] = dao.getList();
-        assertEquals("CDE", pArray2[0].name);
+        dao.update(p1); //更新p1 name為"CDE"
+        Phone pArray2[] = dao.getList(); //重新取得清單
+        assertEquals("CDE", pArray2[0].name); //確認第0號name是否為 "CDE"
     }
 }
